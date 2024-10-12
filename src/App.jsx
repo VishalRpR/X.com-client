@@ -6,6 +6,9 @@ import { FaSearch } from "react-icons/fa";
 import { RiNotification4Line } from "react-icons/ri";
 import { FiMail } from "react-icons/fi";
 import { FaRegUser } from "react-icons/fa6";
+import Feedcomp from './components/Feedcomp';
+import { GoPeople } from 'react-icons/go';
+import { CgMoreO } from 'react-icons/cg';
 
 
 
@@ -29,10 +32,22 @@ function App() {
       name:"Messages"
     },
     {
+      icon:<GoPeople />,
+      name:"Communities"
+    }
+    , {
+      icon:<BsTwitterX />,
+      name:"Premium"
+    },
+    {
       icon:<FaRegUser />,
       name:"Profile"
+    },
+     {
+      icon: <CgMoreO />,
+      name:"More"
     }
-
+   
   
   
   ]
@@ -58,13 +73,22 @@ function App() {
                 </button>
               ))}
           <div/>
-          <button className='rounded-full w-full mt-2 font-bold bg-sky-500 align-middle justify-center px-4 py-4 hover:bg-sky-600 '>POST</button>
+          <button className='rounded-full w-full mt-2 font-bold bg-sky-500 align-middle justify-center px-4 py-3 hover:bg-sky-600 '>POST</button>
           
         </div>
       </div>
 
 
-      <div className="col-span-5 border-r-[0.5px] border-gray-700"></div>
+      <div className="col-span-5 border-r-[0.5px] border-gray-700 overflow-y-scroll no-scrollbar">
+      <Feedcomp></Feedcomp>
+      <Feedcomp></Feedcomp>
+      <Feedcomp></Feedcomp>
+      <Feedcomp></Feedcomp>
+      <Feedcomp></Feedcomp>
+      <Feedcomp></Feedcomp>
+
+
+      </div>
       <div className="col-span-4  "></div>
    
      </div>
