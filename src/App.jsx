@@ -91,7 +91,7 @@ function App() {
 
       </div>
       
-      <div className="col-span-4 mr-32 p-2 pl-7 overflow-y-scroll no-scrollbar">
+      <div className="col-span-4 mr-32 p-2 pl-7">
       <TrendandSearch></TrendandSearch>
       
 

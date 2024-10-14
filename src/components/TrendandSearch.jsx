@@ -6,7 +6,7 @@ import { IoIosMore } from 'react-icons/io'
 function TrendandSearch() {
   return (
     <div>
-        <div className=' w-full h-10 flex rounded-full p-3 bg-gray-800  gap-2 items-center text-gray-500 focus-within:border border-sky-500 focus-within:text-sky-500 focus-within:bg-transparent '>
+        <div className=' w-full h-10 flex sticky top-0 rounded-full p-3 bg-gray-800  gap-2 items-center text-gray-500 focus-within:border border-sky-500 focus-within:text-sky-500 focus-within:bg-black '>
             <i className='px-3 '><FaSearch className='' /></i>
             <input type="text" placeholder='Search' className='bg-transparent w-full focus:outline-none text-white'/>
             
@@ -88,43 +88,12 @@ function TrendandSearch() {
                 </div>
 
 
-                <div className='mt-2 p-3 flex justify-between place-items-start hover:bg-gray-900'>
-                    <div className=' '>
-                        <p className='text-sm  text-gray-500' >Entertainment · Trending</p>
-                        <h2 className='font-bold '>#बहराइच</h2>
-                    </div>
-                    <div className='rounded-full  text-gray-500 text-xl p-1 hover:bg-gray-800 hover:text-sky-500 font-bold '>
-                        <IoIosMore />
-                    </div>
-               
-                   
-                </div>
+              
 
 
-                <div className='mt-2 p-3 flex justify-between place-items-start hover:bg-gray-900'>
-                    <div className=' '>
-                        <p className='text-sm  text-gray-500' >Entertainment · Trending</p>
-                        <h2 className='font-bold '>#बहराइच</h2>
-                    </div>
-                    <div className='rounded-full  text-gray-500 text-xl p-1 hover:bg-gray-800 hover:text-sky-500 font-bold '>
-                        <IoIosMore />
-                    </div>
-               
-                   
-                </div>
+                
 
-
-                <div className='mt-2 p-3 flex justify-between place-items-start hover:bg-gray-900'>
-                    <div className=' '>
-                        <p className='text-sm  text-gray-500' >Entertainment · Trending</p>
-                        <h2 className='font-bold '>#बहराइच</h2>
-                    </div>
-                    <div className='rounded-full  text-gray-500 text-xl p-1 hover:bg-gray-800 hover:text-sky-500 font-bold '>
-                        <IoIosMore />
-                    </div>
-               
-                   
-                </div>
+             
 
 
             </div>
