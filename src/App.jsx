@@ -9,6 +9,7 @@ import { FaRegUser } from "react-icons/fa6";
 import Feedcomp from './components/Feedcomp';
 import { GoPeople } from 'react-icons/go';
 import { CgMoreO } from 'react-icons/cg';
+import TrendandSearch from './components/TrendandSearch';
 
 
 
@@ -78,7 +79,7 @@ function App() {
         </div>
       </div>
 
-
+    
       <div className="col-span-5 border-r-[0.5px] border-gray-700 overflow-y-scroll no-scrollbar">
       <Feedcomp></Feedcomp>
       <Feedcomp></Feedcomp>
@@ -89,9 +90,15 @@ function App() {
 
 
       </div>
-      <div className="col-span-4  "></div>
+      
+      <div className="col-span-4 mr-32 p-2 pl-7 overflow-y-scroll no-scrollbar">
+      <TrendandSearch></TrendandSearch>
+      
+
+      </div>
+  
+      </div>
    
-     </div>
     </div>
   
   )
