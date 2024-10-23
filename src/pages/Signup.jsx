@@ -1,3 +1,4 @@
+import axios from 'axios';
 import React from 'react';
 import { useState } from 'react';
 import { BsTwitterX } from "react-icons/bs";
@@ -11,6 +12,9 @@ const Signup = () => {
     function togglePassword() {
         setShowPassword(!showPassword);
     }
+
+    const [email, SetEmail] = useState("");
+    const [password, SetPassword] = useState("");
 
     return (
         <div className='grid grid-cols-12 h-screen w-screen mt-0 pt-0'>
@@ -27,11 +31,19 @@ const Signup = () => {
                         <h1 className='text-4xl mb-3 font-extrabold'>Join today.</h1>
                         <h1 className='text-2xl font-bold mb-3'>Create your account</h1>
                         <div className=''>
-                            <input type="text" className='bg-transparent border w-full focus:outline-none focus:border-sky-500  border-slate-600 px-3 py-4 mb-3 rounded-md' placeholder='Email' />
+                            <input
+                                type="text"
+                                onChange={(e) => {
+                                    SetEmail(e.target.value);
+                                }}
+                                className='bg-transparent border w-full focus:outline-none focus:border-sky-500  border-slate-600 px-3 py-4 mb-3 rounded-md' placeholder='Email' />
                         </div>
                         <div className='flex items-center  rounded-md pr-3 border  focus-within:border-sky-500 border-slate-600 mb-3'>
                             <input
                                 type={showPassword ? 'text' : 'password'}
+                                onChange={(e) => {
+                                    SetPassword(e.target.value);
+                                }}
                                 className='bg-transparent  w-full px-3 focus:outline-none py-4' placeholder='Password' />
                             <div class="bg-transparent hover:bg-slate-950rounded-full text-2xl text-gray-500 cursor-pointer" onClick={togglePassword}>
                                 {showPassword ? <IoEyeOff /> : <IoEye />}
@@ -39,10 +51,21 @@ const Signup = () => {
                         </div>
                     </div>
                     <div>
-                        <button className='w-full items-center p-3 mt-5 bg-sky-500  text-white font-bold rounded-full hover:bg-sky-600'>Create account</button>
+                        <button
+                            onClick={() => {
+                                axios.post("http://localhost:3000/api/user/signup", {
+                                    email: email,
+                                    password: password
+                                }
+                                )
+                            }}
+                            className='w-full items-center p-3 mt-5 bg-sky-500  text-white font-bold rounded-full hover:bg-sky-600'>Create account</button>
 
                         <h1 className='font-extrabold text-lg mt-7'>Already have an account?</h1>
+
                         <button className='w-full text-sky-500 items-center p-2 my-3 bg-transparent font-bold rounded-full hover:bg-slate-900 border  border-slate-600'>Sign in</button>
+
+
 
                     </div>
                 </div>
