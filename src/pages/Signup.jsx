@@ -4,11 +4,13 @@ import { useState } from 'react';
 import { BsTwitterX } from "react-icons/bs";
 import { GrFormViewHide } from 'react-icons/gr';
 import { IoEye, IoEyeOff } from 'react-icons/io5';
+import { useNavigate } from 'react-router-dom';
 
 
 
 const Signup = () => {
     const [showPassword, setShowPassword] = useState(false);
+    const navigate = useNavigate();
     function togglePassword() {
         setShowPassword(!showPassword);
     }
@@ -17,8 +19,8 @@ const Signup = () => {
     const [password, SetPassword] = useState("");
 
     return (
-        <div className='grid grid-cols-12 h-screen w-screen mt-0 pt-0'>
-            <div className='col-span-7 items-center justify-center mx-auto my-auto' >
+        <div className="grid grid-cols-12 h-screen w-screen mt-0 pt-0 ">
+            <div className='col-span-7 items-center justify-center mx-auto my-auto'>
                 <BsTwitterX className='w-80 h-80' />
             </div>
             <div className='col-span-5'>
@@ -43,27 +45,34 @@ const Signup = () => {
                                 type={showPassword ? 'text' : 'password'}
                                 onChange={(e) => {
                                     SetPassword(e.target.value);
+                                    
                                 }}
                                 className='bg-transparent  w-full px-3 focus:outline-none py-4' placeholder='Password' />
-                            <div class="bg-transparent hover:bg-slate-950rounded-full text-2xl text-gray-500 cursor-pointer" onClick={togglePassword}>
+                            <div className="bg-transparent hover:bg-slate-950rounded-full text-2xl text-gray-500 cursor-pointer" onClick={togglePassword}>
                                 {showPassword ? <IoEyeOff /> : <IoEye />}
                             </div>
                         </div>
                     </div>
                     <div>
                         <button
-                            onClick={() => {
-                                axios.post("http://localhost:3000/api/user/signup", {
+                            onClick={async() => {
+                               const post=await axios.post("http://localhost:3000/api/user/signup", {
                                     email: email,
                                     password: password
+                                })
+                                console.log(post.data.status)
+                                if(post.data.status=="OK"){
+                                    navigate("/signin");
                                 }
-                                )
+                               
                             }}
                             className='w-full items-center p-3 mt-5 bg-sky-500  text-white font-bold rounded-full hover:bg-sky-600'>Create account</button>
 
                         <h1 className='font-extrabold text-lg mt-7'>Already have an account?</h1>
 
-                        <button className='w-full text-sky-500 items-center p-2 my-3 bg-transparent font-bold rounded-full hover:bg-slate-900 border  border-slate-600'>Sign in</button>
+                        <button onClick={()=>{
+                            navigate("/signin")
+                        }} className='w-full text-sky-500 items-center p-2 my-3 bg-transparent font-bold rounded-full hover:bg-slate-900 border  border-slate-600'>Sign in</button>
 
 
 
