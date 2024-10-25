@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { BsTwitterX } from "react-icons/bs";
 import { GrHomeRounded } from "react-icons/gr";
 
@@ -10,9 +10,32 @@ import Feedcomp from '../components/Feedcomp';
 import { GoPeople } from 'react-icons/go';
 import { CgMoreO } from 'react-icons/cg';
 import TrendandSearch from '../components/TrendandSearch';
+import Writetweet from '../components/Writetweet';
+import axios from 'axios';
 
 
 function Parcomp() {
+    const [content, SetContent] = useState([]);
+    const [selectedComments, setSelectedComments] = useState(null);
+    useEffect(() => {
+        const fetchTweet = async () => {
+            try {
+                const tweet = await axios.get("http://localhost:3000/api/tweet");
+                console.log()
+                SetContent(tweet.data.data);
+            } catch (error) {
+                console.error("Error fetching the tweet", error);
+            }
+        };
+
+        fetchTweet();
+
+    }, []);
+
+
+
+
+
 
     const elements = [
         {
@@ -49,8 +72,13 @@ function Parcomp() {
         }
 
 
-
     ]
+
+
+    const handleTweetClick = (comments) => {
+        setSelectedComments(comments);
+    };
+
     return (
         <div>
 
@@ -70,28 +98,35 @@ function Parcomp() {
                             </button>
                         ))}
                         <div />
-                        <button className='rounded-full w-full mt-2 font-bold bg-sky-500 align-middle justify-center px-4 py-3 hover:bg-sky-600 '>POST</button>
+                        <button className='rounded-full w-full mt-2 font-bold bg-sky-500 align-middle justify-center px-4 py-3 hover:bg-sky-600 '>Post</button>
+
+                    </div>
+                </div>
+                <div className='flex justify-start grid grid-cols-9 overflow-y-scroll no-scrollbar col-span-9'>
+
+                    <div className="col-span-5 border-r-[0.5px] border-gray-700 overflow-y-scroll no-scrollbar">
+                        <Writetweet></Writetweet>
+                        {content.map((user) => (
+                            <div key={user._id} onClick={() => handleTweetClick(user.comments)}>
+                                <Feedcomp content={user.content} />
+                            </div>
+                        ))}
+
+                        {selectedComments && selectedComments.map((comment, index) => (
+                            <Feedcomp key={index} content={comment} />
+                        ))}
+
+
+
+                    </div>
+
+                    <div className="col-span-4 mr-32 pb-2 pl-7 mt-0">
+                        <TrendandSearch></TrendandSearch>
+
 
                     </div>
                 </div>
 
-
-                <div className="col-span-5 border-r-[0.5px] border-gray-700 overflow-y-scroll no-scrollbar">
-                    <Feedcomp></Feedcomp>
-                    <Feedcomp></Feedcomp>
-                    <Feedcomp></Feedcomp>
-                    <Feedcomp></Feedcomp>
-                    <Feedcomp></Feedcomp>
-                    <Feedcomp></Feedcomp>
-
-
-                </div>
-
-                <div className="col-span-4 mr-32 p-2 pl-7">
-                    <TrendandSearch></TrendandSearch>
-
-
-                </div>
 
             </div>
 

@@ -1,11 +1,11 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { BiMessageRounded } from 'react-icons/bi'
 import { FaRetweet } from 'react-icons/fa6'
 import { IoHeartOutline } from 'react-icons/io5'
 import { LuBookmark } from 'react-icons/lu'
 import { MdOutlineFileUpload } from 'react-icons/md'
 
-function Feedcomp() {
+function Feedcomp({content}) {
 
     const multiplebtn = [
 
@@ -24,6 +24,8 @@ function Feedcomp() {
 
     ]
 
+    
+
 
     return (
         <div>
@@ -37,14 +39,8 @@ function Feedcomp() {
                         <p className='text-slate-500'>@vishalRpR . 2h</p>
                     </div>
                     <div>
-                        <p>Top G.
-                            <p>G stands for giveaway.
-
-                                I bought a brand new Lamborghini STO and wrapped it with Big G Trump.
-                            </p>
-                            <p>🚗 I'M GIVING THIS CAR AWAY ON OCTOBER 15TH 🚗</p>
-
-                            To qualify
+                        <p>
+                            {content}
                         </p>
                     </div>
                     <div className='flex justify-between py-2 text-xl text-gray-600'>

@@ -5,11 +5,14 @@ import { IoIosMore } from 'react-icons/io'
 
 function TrendandSearch() {
     return (
-        <div>
-            <div className=' w-full h-10 flex sticky top-0 rounded-full p-3 bg-gray-800  gap-2 items-center text-gray-500 focus-within:border border-sky-500 focus-within:text-sky-500 focus-within:bg-black '>
+        <div className='mt-0'>
+
+            <div className='bg-black sticky top-2 mt-0 p-1'>
+            <div className=' w-full h-10 flex rounded-full p-3 bg-gray-800  gap-2 items-center text-gray-500 focus-within:border border-sky-500 focus-within:text-sky-500 focus-within:bg-black '>
                 <i className='px-3 '><FaSearch className='' /></i>
                 <input type="text" placeholder='Search' className='bg-transparent w-full focus:outline-none text-white' />
 
+            </div>
             </div>
             <div className='border rounded-xl h-screen mt-6 border-r-[0.5px] border-gray-700'>
                 <div className='p-1'>
