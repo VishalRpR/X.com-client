@@ -57,15 +57,29 @@ const Signup = () => {
                     <div>
                         <button
                             onClick={async() => {
-                               const post=await axios.post("http://localhost:3000/api/user/signup", {
-                                    email: email,
-                                    password: password
-                                })
-                                console.log(post.data.status)
-                                if(post.data.status=="OK"){
-                                    toast.success("User created Successfully")
-                                    navigate("/signin");
-                                }
+                               
+
+                              
+                               try {
+
+                                   const post = await axios.post("http://localhost:3000/api/user/signup", {
+                                       email: email,
+                                       password: password
+                                   })
+                                   // console.log(post.data.status)
+                                   if (post.data.status == "OK") {
+                                       toast.success("User created Successfully")
+                                       navigate("/signin");
+                                   } 
+                                
+                               } catch (error) {
+                                      
+                                      toast.error(error.response.data.err);
+                                       navigate("/signin")
+                            }
+                            
+
+                             
                                
                             }}
                             className='w-full items-center p-3 mt-5 bg-sky-500  text-white font-bold rounded-full hover:bg-sky-600'>Create account</button>
