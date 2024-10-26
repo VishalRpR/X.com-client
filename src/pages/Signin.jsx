@@ -5,6 +5,7 @@ import { BsTwitter, BsTwitterX } from 'react-icons/bs'
 import { IoEye, IoEyeOff } from 'react-icons/io5'
 import { Link, useNavigate } from 'react-router-dom'
 import axios from 'axios'
+import toast from 'react-hot-toast'
 
 
 const Signin = () => {
@@ -65,10 +66,15 @@ const Signin = () => {
                             email: email,
                             password: password
                         })
-                        console.log(post.data.status)
-                        if(post.data.status="OK") {
+
+                        if(post.data.status=="OK") {
+
+
                             localStorage.setItem("token",post.data.data)
+                            toast.success(`${post.data.message}`)
                             navigate("/dash")
+                        }else{
+                            toast.error(`${post.data.message}`)
                         }
 
                       

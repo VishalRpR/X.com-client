@@ -3,6 +3,7 @@ import React, { useState } from 'react'
 import { CiImageOn } from 'react-icons/ci'
 import { FaRegImage } from 'react-icons/fa6'
 import Feedcomp from './Feedcomp';
+import toast from 'react-hot-toast';
 
 const Writetweet = () => {
 
@@ -33,13 +34,21 @@ const Writetweet = () => {
                         
                           onClick={async()=>{
                                   const tok=localStorage.getItem("token")
+                               if(!tok){
+                                    toast.error("Please login")
+                                  }
+                                  
                                   const response = await axios.post("http://localhost:3000/api/tweet",{
                                       content:tweet
                                   }, {
                                       headers: { Authorization: `Bearer ${tok}` }
                                   }) 
 
-                                  console.log(response.data.data._id)
+                                console.log(response.data)
+
+                              if(response.data.data._id){
+                                  toast.success("Tweet creatd successfully")
+                              }
                                   
                                   
                     

@@ -1,6 +1,7 @@
 import axios from 'axios';
 import React from 'react';
 import { useState } from 'react';
+import toast from 'react-hot-toast';
 import { BsTwitterX } from "react-icons/bs";
 import { GrFormViewHide } from 'react-icons/gr';
 import { IoEye, IoEyeOff } from 'react-icons/io5';
@@ -62,6 +63,7 @@ const Signup = () => {
                                 })
                                 console.log(post.data.status)
                                 if(post.data.status=="OK"){
+                                    toast.success("User created Successfully")
                                     navigate("/signin");
                                 }
                                
