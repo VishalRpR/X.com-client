@@ -66,7 +66,7 @@ const Signin = () => {
                             email: email,
                             password: password
                         })
-
+                             console.log(post.data)
                         if(post.data.status=="OK") {
 
 

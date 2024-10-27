@@ -62,6 +62,12 @@ const Signup = () => {
                               
                                try {
 
+                                   if (!email || !password) {
+                                       toast.error("Email and password are required");
+                                       return;
+                                   }
+                              
+
                                    const post = await axios.post("http://localhost:3000/api/user/signup", {
                                        email: email,
                                        password: password
