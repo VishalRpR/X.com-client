@@ -1,11 +1,33 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { BiMessageRounded } from 'react-icons/bi'
 import { FaRetweet } from 'react-icons/fa6'
 import { IoHeartOutline } from 'react-icons/io5'
 import { LuBookmark } from 'react-icons/lu'
 import { MdOutlineFileUpload } from 'react-icons/md'
+import axios from "axios";
 
-function Feedcomp({content}) {
+function Feedcomp({ content }) {
+
+    const token = localStorage.getItem("token");
+
+    const [username, SetUsername] = useState("");
+
+    useEffect(() => {
+        async function getuser(){
+
+            const user = await axios.get("http://localhost:3000/api/user/", {
+                headers: { Authorization: `Bearer ${token}` }
+
+            })
+                console.log(user.data)
+            SetUsername(user.data.data.email)
+
+        }
+
+        getuser();
+    }, [])
+
+   
 
     const multiplebtn = [
 
@@ -24,8 +46,6 @@ function Feedcomp({content}) {
 
     ]
 
-    
-
 
     return (
         <div>
@@ -35,7 +55,7 @@ function Feedcomp({content}) {
                 </div>
                 <div className='col-span-11 p-1 mr-2'>
                     <div className='flex gap-1'>
-                        <h1 className='font-bold'>Vishal</h1>
+                        <h1 className='font-bold'>{username}</h1>
                         <p className='text-slate-500'>@vishalRpR . 2h</p>
                     </div>
                     <div>
