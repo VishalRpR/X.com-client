@@ -13,16 +13,18 @@ import TrendandSearch from '../components/TrendandSearch';
 import Writetweet from '../components/Writetweet';
 import axios from 'axios';
 import SideBar from '../components/SideBar';
+import CommentThread from '../components/CommentThread';
 
 
 function Parcomp() {
     const [content, SetContent] = useState([]);
-    const [selectedComments, setSelectedComments] = useState(null);
+    const [selectedTweet, setSelectedTweet] = useState(null);
+  
     useEffect(() => {
         const fetchTweet = async () => {
             try {
                 const tweet = await axios.get("http://localhost:3000/api/tweet");
-                console.log()
+                console.log(tweet.data)
                 SetContent(tweet.data.data);
             } catch (error) {
                 console.error("Error fetching the tweet", error);
@@ -33,13 +35,16 @@ function Parcomp() {
 
     }, []);
 
+    const handleTweetClick = (tweet) => {
+        console.log(tweet)
+        setSelectedTweet(tweet);
+    };
+
 
    
 
 
-    const handleTweetClick = (comments) => {
-        setSelectedComments(comments);
-    };
+
 
     return (
         <div>
@@ -51,16 +56,17 @@ function Parcomp() {
 
                     <div className="col-span-5 border-r-[0.5px] border-gray-700 overflow-y-scroll no-scrollbar">
                         <Writetweet></Writetweet>
-                        {content.map((user) => (
-                            <div key={user._id} onClick={() => handleTweetClick(user.comments)}>
-                                <Feedcomp content={user.content} />
-                            </div>
-                        ))}
+                        {selectedTweet ? (
+                            <CommentThread commentData={selectedTweet} />
+                        ) : (
+                            content.map((tweet) => (
+                                <div key={tweet._id} onClick={() => handleTweetClick(tweet)}>
+                                    <Feedcomp content={tweet.content} />
+                                </div>
+                            ))
+                        )}
 
-                        {selectedComments && selectedComments.map((comment, index) => (
-                            <Feedcomp key={index} content={comment} />
-                        ))}
-
+                      
 
 
                     </div>

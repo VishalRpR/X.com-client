@@ -8,6 +8,27 @@ function TrendandSearch() {
 
     const [hashtagData, setHashtagData] = useState([]);
 
+    const [search,SetSearch]=useState("");
+
+
+            useEffect(()=>{
+                console.log(search)
+
+                const fetchData=async ()=>{
+                    try {
+                        const searchtag = await axios.get("http://localhost:3000/api/hashtag/bulk?text=" + search)
+                        const sortedData = searchtag.data.data.sort((a, b) => b.tweets.length - a.tweets.length);
+                        setHashtagData(sortedData)
+                    } catch (error) {
+                        console.log(error)
+                        
+                    }
+                }
+
+                fetchData()
+
+            }, [search])
+
 
     useEffect(() => {
         // Fetch the data from your API or use static data
@@ -31,7 +52,10 @@ function TrendandSearch() {
             <div className='bg-black sticky top-2 mt-0 p-1'>
                 <div className=' w-full h-10 flex rounded-full p-3 bg-gray-800  gap-2 items-center text-gray-500 focus-within:border border-sky-500 focus-within:text-sky-500 focus-within:bg-black '>
                     <i className='px-3 '><FaSearch className='' /></i>
-                    <input type="text" placeholder='Search' className='bg-transparent w-full focus:outline-none text-white' />
+                    <input type="text" placeholder='Search' className='bg-transparent w-full focus:outline-none text-white' 
+                    onChange={(e)=>{
+                        SetSearch(e.target.value)
+                    }}/>
 
                 </div>
             </div>
