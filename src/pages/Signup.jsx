@@ -68,7 +68,7 @@ const Signup = () => {
                                     }
 
 
-                                    const post = await axios.post("http://localhost:3000/api/user/signup", {
+                                    const post = await axios.post(`${BACKEND_URL}/api/user/signup`, {
                                         email: email,
                                         password: password
                                     })

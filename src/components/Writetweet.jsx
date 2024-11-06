@@ -38,7 +38,7 @@ const Writetweet = () => {
                                     toast.error("Please login")
                                   }
                                   
-                                  const response = await axios.post("http://localhost:3000/api/tweet",{
+                                  const response = await axios.post(`${BACKEND_URL}/api/tweet`,{
                                       content:tweet
                                   }, {
                                       headers: { Authorization: `Bearer ${tok}` }

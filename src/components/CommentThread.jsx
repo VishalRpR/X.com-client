@@ -10,7 +10,7 @@ const CommentThread = ({ commentData }) => {
     useEffect(() => {
         const fetchComment = async () => {
             try {
-                const comment = await axios.get("http://localhost:3000/api/comment/?modelId=" + commentData._id,{
+                const comment = await axios.get(`${ BACKEND_URL } /api/comment/?modelId=` + commentData._id,{
                     headers: { Authorization: `Bearer ${token}` }
                 });
                 console.log(comment.data.data)

@@ -15,7 +15,7 @@ function TrendandSearch() {
                
                 const fetchData=async ()=>{
                     try {
-                        const searchtag = await axios.get("http://localhost:3000/api/hashtag/bulk?text=" + search)
+                        const searchtag = await axios.get(`${BACKEND_URL}/api/hashtag/bulk?text=` + search)
                         const sortedData = searchtag.data.data.sort((a, b) => b.tweets.length - a.tweets.length);
                         setHashtagData(sortedData)
                     } catch (error) {
@@ -33,7 +33,7 @@ function TrendandSearch() {
         // Fetch the data from your API or use static data
         const fetchData = async () => {
             try {
-                const response = await axios.get("http://localhost:3000/api/hashtag"); // Adjust this URL to your API endpoint
+                const response = await axios.get(`${BACKEND_URL}/api/hashtag`); // Adjust this URL to your API endpoint
                 const sortedData = response.data.data.sort((a, b) => b.tweets.length - a.tweets.length);
                 setHashtagData(sortedData);
             } catch (error) {

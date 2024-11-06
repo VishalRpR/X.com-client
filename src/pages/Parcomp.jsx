@@ -15,7 +15,7 @@ function Parcomp() {
     useEffect(() => {
         const fetchTweet = async () => {
             try {
-                const tweet = await axios.get("http://localhost:3000/api/tweet");
+                const tweet = await axios.get(`${BACKEND_URL}/api/tweet`);
                
                 SetContent(tweet.data.data);
             } catch (error) {
