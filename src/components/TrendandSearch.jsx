@@ -12,15 +12,14 @@ function TrendandSearch() {
 
 
             useEffect(()=>{
-                console.log(search)
-
+               
                 const fetchData=async ()=>{
                     try {
                         const searchtag = await axios.get("http://localhost:3000/api/hashtag/bulk?text=" + search)
                         const sortedData = searchtag.data.data.sort((a, b) => b.tweets.length - a.tweets.length);
                         setHashtagData(sortedData)
                     } catch (error) {
-                        console.log(error)
+                      
                         
                     }
                 }
@@ -38,7 +37,7 @@ function TrendandSearch() {
                 const sortedData = response.data.data.sort((a, b) => b.tweets.length - a.tweets.length);
                 setHashtagData(sortedData);
             } catch (error) {
-                console.error("Error fetching data:", error);
+            
             }
         };
 

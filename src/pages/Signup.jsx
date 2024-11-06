@@ -72,7 +72,7 @@ const Signup = () => {
                                         email: email,
                                         password: password
                                     })
-                                    // console.log(post.data.status)
+                                
                                     if (post.data.status == "OK") {
                                         toast.success(post.data.message)
                                         navigate("/signin");

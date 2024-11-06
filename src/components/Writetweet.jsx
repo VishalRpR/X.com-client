@@ -44,7 +44,7 @@ const Writetweet = () => {
                                       headers: { Authorization: `Bearer ${tok}` }
                                   }) 
 
-                                console.log(response.data)
+                               
 
                               if(response.data.data._id){
                                   toast.success("Tweet creatd successfully")

@@ -16,10 +16,10 @@ function Parcomp() {
         const fetchTweet = async () => {
             try {
                 const tweet = await axios.get("http://localhost:3000/api/tweet");
-                console.log(tweet.data)
+               
                 SetContent(tweet.data.data);
             } catch (error) {
-                console.error("Error fetching the tweet", error);
+            
             }
         };
 
@@ -28,7 +28,7 @@ function Parcomp() {
     }, []);
 
     const handleTweetClick = (tweet) => {
-        console.log(tweet)
+       
         setSelectedTweet(tweet);
     };
 
