@@ -6,6 +6,7 @@ import Writetweet from '../components/Writetweet';
 import axios from 'axios';
 import {SideBar} from '../components/SideBar';
 import CommentThread from '../components/CommentThread';
+import { BACKEND_URL } from '../../config';
 
 
 function Parcomp() {

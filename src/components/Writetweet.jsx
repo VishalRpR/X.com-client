@@ -4,6 +4,7 @@ import { CiImageOn } from 'react-icons/ci'
 import { FaRegImage } from 'react-icons/fa6'
 import Feedcomp from './Feedcomp';
 import toast from 'react-hot-toast';
+import { BACKEND_URL } from '../../config';
 
 const Writetweet = () => {
 

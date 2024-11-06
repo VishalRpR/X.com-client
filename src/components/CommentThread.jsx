@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import Feedcomp from './Feedcomp'
 import axios from 'axios';
 import Writetweet from './Writetweet';
+import { BACKEND_URL } from '../../config';
 
 const CommentThread = ({ commentData }) => {
     const token = localStorage.getItem("token");
@@ -10,7 +11,7 @@ const CommentThread = ({ commentData }) => {
     useEffect(() => {
         const fetchComment = async () => {
             try {
-                const comment = await axios.get(`${ BACKEND_URL } /api/comment/?modelId=` + commentData._id,{
+                const comment = await axios.get(`${ BACKEND_URL} /api/comment/?modelId=` + commentData._id,{
                     headers: { Authorization: `Bearer ${token}` }
                 });
                 console.log(comment.data.data)

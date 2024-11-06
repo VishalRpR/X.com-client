@@ -10,6 +10,7 @@ import { GrHomeRounded } from 'react-icons/gr'
 import { IoIosMore } from 'react-icons/io'
 import { RiNotification4Line } from 'react-icons/ri'
 import { useNavigate } from 'react-router-dom'
+import { BACKEND_URL } from '../../config'
 
 export const SideBar = () => {
     const token = localStorage.getItem("token");

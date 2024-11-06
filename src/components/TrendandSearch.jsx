@@ -3,6 +3,7 @@ import React, { useEffect, useState } from 'react'
 import { CgMoreO } from 'react-icons/cg'
 import { FaSearch } from 'react-icons/fa'
 import { IoIosMore } from 'react-icons/io'
+import { BACKEND_URL } from '../../config'
 
 function TrendandSearch() {
 

@@ -6,6 +6,7 @@ import { IoEye, IoEyeOff } from 'react-icons/io5'
 import { Link, useNavigate } from 'react-router-dom'
 import axios from 'axios'
 import toast from 'react-hot-toast'
+import { BACKEND_URL } from "../../config"
 
 
 const Signin = () => {
@@ -62,13 +63,13 @@ const Signin = () => {
 
                     <button onClick={async (e) => {
                         e.preventDefault()
-                     
+                       console.log("clicked")
                         try {
                             const post = await axios.post(`${BACKEND_URL}/api/user/signin`, {
                                 email: email,
                                 password: password
                             })
-                          
+
                             if (post.data.status == "OK") {
 
 
