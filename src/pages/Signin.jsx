@@ -60,24 +60,31 @@ const Signin = () => {
                     </div>
 
 
-                    <button onClick={async(e) => {
-                        e.preventDefault();
-                        const post = await axios.post("http://localhost:3000/api/user/signin", {
-                            email: email,
-                            password: password
-                        })
-                             console.log(post.data)
-                        if(post.data.status=="OK") {
+                    <button onClick={async (e) => {
+                        e.preventDefault()
+                     
+                        try {
+                            const post = await axios.post("http://localhost:3000/api/user/signin", {
+                                email: email,
+                                password: password
+                            })
+                            console.log(post.data)
+                            if (post.data.status == "OK") {
 
 
-                            localStorage.setItem("token",post.data.data)
-                            toast.success(`${post.data.message}`)
-                            navigate("/dash")
-                        }else{
-                            toast.error(`${post.data.message}`)
+                                localStorage.setItem("token", post.data.data)
+                                toast.success(post.data.message)
+                                navigate("/dash")
+                            }
+
+
+                        } catch (error) {
+
+                            toast.error(error.response.data.message)
+
                         }
 
-                      
+
                     }} className='w-full text-black items-center p-2 my-3 bg-white font-bold rounded-full hover:bg-slate-200 '>Next</button>
                     <div className='mt-5 text-slate-300'>Don’t have an account? <Link to={"/signup"} className='text-sky-500'>Sign up</Link></div>
                 </div>

@@ -15,6 +15,7 @@ function App() {
     <div>
       <BrowserRouter>
         <Routes>
+          <Route path='/' element={<Signup/>}/>
           <Route path='/signup' element={<Signup></Signup>} />
           <Route path='/signin' element={<Signin></Signin>} />
           <Route path='/dash' element={<Parcomp></Parcomp>} />

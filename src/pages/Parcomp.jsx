@@ -1,18 +1,10 @@
 import React, { useEffect, useState } from 'react'
-import { BsTwitterX } from "react-icons/bs";
-import { GrHomeRounded } from "react-icons/gr";
-
-import { FaSearch } from "react-icons/fa";
-import { RiNotification4Line } from "react-icons/ri";
-import { FiMail } from "react-icons/fi";
-import { FaRegUser } from "react-icons/fa6";
 import Feedcomp from '../components/Feedcomp';
-import { GoPeople } from 'react-icons/go';
-import { CgMoreO } from 'react-icons/cg';
+
 import TrendandSearch from '../components/TrendandSearch';
 import Writetweet from '../components/Writetweet';
 import axios from 'axios';
-import SideBar from '../components/SideBar';
+import {SideBar} from '../components/SideBar';
 import CommentThread from '../components/CommentThread';
 
 
@@ -39,10 +31,6 @@ function Parcomp() {
         console.log(tweet)
         setSelectedTweet(tweet);
     };
-
-
-   
-
 
 
 

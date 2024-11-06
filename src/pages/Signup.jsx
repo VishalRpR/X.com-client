@@ -46,7 +46,7 @@ const Signup = () => {
                                 type={showPassword ? 'text' : 'password'}
                                 onChange={(e) => {
                                     SetPassword(e.target.value);
-                                    
+
                                 }}
                                 className='bg-transparent  w-full px-3 focus:outline-none py-4' placeholder='Password' />
                             <div className="bg-transparent hover:bg-slate-950rounded-full text-2xl text-gray-500 cursor-pointer" onClick={togglePassword}>
@@ -56,43 +56,43 @@ const Signup = () => {
                     </div>
                     <div>
                         <button
-                            onClick={async() => {
-                               
+                            onClick={async () => {
 
-                              
-                               try {
 
-                                   if (!email || !password) {
-                                       toast.error("Email and password are required");
-                                       return;
-                                   }
-                              
 
-                                   const post = await axios.post("http://localhost:3000/api/user/signup", {
-                                       email: email,
-                                       password: password
-                                   })
-                                   // console.log(post.data.status)
-                                   if (post.data.status == "OK") {
-                                       toast.success("User created Successfully")
-                                       navigate("/signin");
-                                   } 
-                                
-                               } catch (error) {
-                                      
-                                      toast.error(error.response.data.err);
-                                       navigate("/signin")
-                            }
-                            
+                                try {
 
-                             
-                               
+                                    if (!email || !password) {
+                                        toast.error("Email and password are required");
+                                        return;
+                                    }
+
+
+                                    const post = await axios.post("http://localhost:3000/api/user/signup", {
+                                        email: email,
+                                        password: password
+                                    })
+                                    // console.log(post.data.status)
+                                    if (post.data.status == "OK") {
+                                        toast.success(post.data.message)
+                                        navigate("/signin");
+                                    }
+
+                                } catch (error) {
+
+                                    toast.error(error.response.data.message);
+                                    
+                                }
+
+
+
+
                             }}
                             className='w-full items-center p-3 mt-5 bg-sky-500  text-white font-bold rounded-full hover:bg-sky-600'>Create account</button>
 
                         <h1 className='font-extrabold text-lg mt-7'>Already have an account?</h1>
 
-                        <button onClick={()=>{
+                        <button onClick={() => {
                             navigate("/signin")
                         }} className='w-full text-sky-500 items-center p-2 my-3 bg-transparent font-bold rounded-full hover:bg-slate-900 border  border-slate-600'>Sign in</button>
 
