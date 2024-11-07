@@ -94,7 +94,10 @@ export const SideBar = () => {
                     </button>
                 ))}
                 <div />
-                <button className='rounded-full w-full mt-2 font-bold bg-sky-500 align-middle justify-center px-4 py-3 hover:bg-sky-600 '>Post</button>
+                <button className='rounded-full w-full mt-2 font-bold bg-sky-500 align-middle justify-center px-4 py-3 hover:bg-sky-600 '
+                onClick={()=>{
+                    navigate("/write")
+                }}>Post</button>
 
                {logoutvis?<Logout username={username} onClick={()=>{
                     localStorage.removeItem("token")

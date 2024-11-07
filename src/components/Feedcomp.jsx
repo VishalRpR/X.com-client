@@ -7,7 +7,7 @@ import { MdOutlineFileUpload } from 'react-icons/md'
 import axios from "axios";
 import { BACKEND_URL } from '../../config'
 
-function Feedcomp({ content }) {
+function Feedcomp({ content}) {
 
     const token = localStorage.getItem("token");
 

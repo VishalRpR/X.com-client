@@ -7,11 +7,14 @@ import axios from 'axios';
 import {SideBar} from '../components/SideBar';
 import CommentThread from '../components/CommentThread';
 import { BACKEND_URL } from '../../config';
+import { useNavigate } from 'react-router-dom';
 
 
-function Parcomp() {
+function Dash() {
+    const navigate=useNavigate();
     const [content, SetContent] = useState([]);
     const [selectedTweet, setSelectedTweet] = useState(null);
+  
   
     useEffect(() => {
         const fetchTweet = async () => {
@@ -31,6 +34,8 @@ function Parcomp() {
     const handleTweetClick = (tweet) => {
        
         setSelectedTweet(tweet);
+
+        navigate(`/dash/${tweet._id}`)
     };
 
 
@@ -44,7 +49,7 @@ function Parcomp() {
                 <div className='flex justify-start grid grid-cols-9 overflow-y-scroll no-scrollbar col-span-9'>
 
                     <div className="col-span-5 border-r-[0.5px] border-gray-700 overflow-y-scroll no-scrollbar">
-                        <Writetweet></Writetweet>
+                        <Writetweet lable='What is Happening?!' modelType={null} modelId={null}></Writetweet>
                         {selectedTweet ? (
                             <CommentThread commentData={selectedTweet} />
                         ) : (
@@ -74,4 +79,4 @@ function Parcomp() {
     )
 }
 
-export default Parcomp
+export default Dash

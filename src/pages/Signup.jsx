@@ -63,6 +63,7 @@ const Signup = () => {
 
                                 try {
 
+
                                     if (!email || !password) {
                                         toast.error("Email and password are required");
                                         return;
