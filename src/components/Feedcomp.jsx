@@ -20,7 +20,7 @@ function Feedcomp({ content}) {
                 headers: { Authorization: `Bearer ${token}` }
 
             })
-                console.log(user.data)
+               
             SetUsername(user.data.data.email)
 
         }

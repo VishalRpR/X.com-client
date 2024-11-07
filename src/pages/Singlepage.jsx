@@ -12,8 +12,7 @@ import { useParams } from 'react-router-dom';
 
 function Singlepage() {
     const { modelId } = useParams();
-    console.log("-----------------------------------")
-    // console.log(commentData.comment)
+   
     const token = localStorage.getItem("token");
     const [maintweet,SetMaintweet]=useState("");
     const [comment, SetComment] = useState([]);
@@ -47,7 +46,7 @@ function Singlepage() {
                     headers: { Authorization: `Bearer ${token}` }
                 });
 
-                console.log(comment)
+              
 
                 SetComment(comment.data.data);
             } catch (error) {

@@ -5,8 +5,7 @@ import Writetweet from './Writetweet';
 import { BACKEND_URL } from '../../config';
 
 const CommentThread = ({ commentData }) => {
-    console.log("-----------------------------------")
-    console.log(commentData.comment)
+   
     const token = localStorage.getItem("token");
     const [comment, SetComment] = useState([]);
 
@@ -16,8 +15,7 @@ const CommentThread = ({ commentData }) => {
                 const comment = await axios.get(`${BACKEND_URL}/api/comment/?modelId=${commentData._id}&&modelType=Tweet` , {
                     headers: { Authorization: `Bearer ${token}` }
                 });
-                console.log(commentData.id)
-                console.log(comment)
+              
 
                 SetComment(comment.data.data);
             } catch (error) {

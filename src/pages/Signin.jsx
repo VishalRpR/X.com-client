@@ -63,7 +63,7 @@ const Signin = () => {
 
                     <button onClick={async (e) => {
                         e.preventDefault()
-                       console.log("clicked")
+                     
                         try {
                             const post = await axios.post(`${BACKEND_URL}/api/user/signin`, {
                                 email: email,
