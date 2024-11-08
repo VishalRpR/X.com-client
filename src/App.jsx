@@ -22,7 +22,8 @@ function App() {
           <Route path='/signin' element={<Signin></Signin>} />
           <Route path='/dash' element={<Parcomp></Parcomp>} />
           <Route path='/write' element={<Writetweetpage></Writetweetpage>} />
-          <Route path='/dash/:modelId' element={<Singlepage></Singlepage>} />
+          <Route path='/dash/tweet/:modelId' element={<Singlepage modelType="Tweet"></Singlepage>} />
+          <Route path='/dash/comment/:modelId' element={<Singlepage modelType="Comment"></Singlepage>} />
         </Routes>
       </BrowserRouter>
 

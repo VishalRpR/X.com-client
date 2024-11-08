@@ -7,10 +7,10 @@ import toast from 'react-hot-toast';
 import { BACKEND_URL } from '../../config';
 import { useNavigate } from 'react-router-dom';
 
-const Writetweet = ({ lable, modelType = null, modelId = null }) => {
+const Writetweet = ({ lable, modelType = null, modelId = null, onTweetPosted }) => {
     const navigate = useNavigate();
 
-
+  
 
     const [tweet, SetTweet] = useState("");
 
@@ -32,6 +32,8 @@ const Writetweet = ({ lable, modelType = null, modelId = null }) => {
             })
             if (response) {
                 toast.success(response.data.message)
+                SetTweet(""); 
+                onTweetPosted();
 
             }
 
@@ -61,9 +63,13 @@ const Writetweet = ({ lable, modelType = null, modelId = null }) => {
                 headers: { Authorization: `Bearer ${tok}` }
             })
 
+
+            console.log(response)
             if (response.data.data._id) {
                 toast.success("Tweet creatd successfully");
-                navigate("/dash")
+                SetTweet("");
+                onTweetPosted();
+                
             }
 
         } catch (error) {
@@ -86,6 +92,7 @@ const Writetweet = ({ lable, modelType = null, modelId = null }) => {
 
                     <div>
                         <textarea
+                        value={tweet}
                             onChange={(e) => {
                                 SetTweet(e.target.value);
                             }}

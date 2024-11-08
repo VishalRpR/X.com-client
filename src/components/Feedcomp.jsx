@@ -7,28 +7,30 @@ import { MdOutlineFileUpload } from 'react-icons/md'
 import axios from "axios";
 import { BACKEND_URL } from '../../config'
 
-function Feedcomp({ content}) {
+function Feedcomp({ content, userId = null }) {
 
     const token = localStorage.getItem("token");
 
     const [username, SetUsername] = useState("");
 
     useEffect(() => {
-        async function getuser(){
+        async function getuser() {
+           
+            if (userId != null) {
+                const user = await axios.get(`${BACKEND_URL}/api/user/id/${userId}`, {
+                    headers: { Authorization: `Bearer ${token}` }
 
-            const user = await axios.get(`${BACKEND_URL}/api/user/`, {
-                headers: { Authorization: `Bearer ${token}` }
-
-            })
-               
-            SetUsername(user.data.data.email)
+                })
+          
+                SetUsername(user.data.data.email)
+            }
 
         }
 
         getuser();
     }, [])
 
-   
+
 
     const multiplebtn = [
 
@@ -57,7 +59,7 @@ function Feedcomp({ content}) {
                 <div className='col-span-11 p-1 mr-2'>
                     <div className='flex gap-1'>
                         <h1 className='font-bold'>{username}</h1>
-                        <p className='text-slate-500'>@vishalRpR . 2h</p>
+                        <p className='text-slate-500'>@{userId} . 2h</p>
                     </div>
                     <div>
                         <p>

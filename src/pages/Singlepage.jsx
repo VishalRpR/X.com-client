@@ -7,56 +7,91 @@ import axios from 'axios';
 import { SideBar } from '../components/SideBar';
 import CommentThread from '../components/CommentThread';
 import { BACKEND_URL } from '../../config';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 
 
-function Singlepage() {
+function Singlepage({ modelType }) {
     const { modelId } = useParams();
-   
+
+    const navigate = useNavigate();
+
     const token = localStorage.getItem("token");
-    const [maintweet,SetMaintweet]=useState("");
-    const [comment, SetComment] = useState([]);
+    const [maindata, SetMaindata] = useState("");
+   
+    const [commentondata, SetCommentondata] = useState([]);
 
-
-
-    useEffect(() => {
-        const fetchTweet = async () => {
-            try {
-                const tweet = await axios.get(`${BACKEND_URL}/api/tweet/${modelId}`, {
-                    headers: { Authorization: `Bearer ${token}` }
-                });
-                SetMaintweet(tweet.data.data.content)
-              
-            } catch (error) {
-                        console.log(error)
-            }
-        };
-
-        fetchTweet();
-
-    }, []);
 
 
 
 
     useEffect(() => {
-        const fetchComment = async () => {
+        const fetchMainData = async () => {
             try {
-                const comment = await axios.get(`${BACKEND_URL}/api/comment/?modelId=${modelId}&&modelType=Tweet`, {
-                    headers: { Authorization: `Bearer ${token}` }
-                });
+                if (modelType == "Tweet") {
+                    const tweet = await axios.get(`${BACKEND_URL}/api/tweet/${modelId}`, {
+                        headers: { Authorization: `Bearer ${token}` }
+                    });
 
-              
+                    SetMaindata(tweet.data.data.content)
+                } else if (modelType == "Comment") {
+                    const onecomment = await axios.get(`${BACKEND_URL}/api/comment/${modelId}`, {
+                        headers: { Authorization: `Bearer ${token}` }
 
-                SetComment(comment.data.data);
+                    });
+
+                    console.log(onecomment.data.data.content)
+                    SetMaindata(onecomment.data.data)
+
+
+                }
+
             } catch (error) {
-                console.error("Error fetching the tweet", error);
+                console.log(error)
             }
         };
+
+        fetchMainData();
+
+    }, [modelType,modelId]);
+
+
+    const fetchComment = async () => {
+        try {
+
+            console.log(modelType)
+            const comment = await axios.get(`${BACKEND_URL}/api/comment/?modelId=${modelId}&&modelType=${modelType}`, {
+                headers: { Authorization: `Bearer ${token}` }
+            });
+
+
+
+            console.log(comment.data.data)
+            SetCommentondata(comment.data.data);
+
+
+
+        } catch (error) {
+            console.error("Error fetching the tweet", error);
+        }
+    };
+
+    useEffect(() => {
+
+       
 
         fetchComment();
 
-    }, []);
+    }, [modelType, modelId]);
+
+
+    async function opencomment(modelId) {
+
+        console.log("clicked")
+
+        await navigate(`/dash/comment/${modelId}`);
+    }
+
+
     return (
         <div>
 
@@ -67,17 +102,24 @@ function Singlepage() {
 
                     <div className="col-span-5 border-r-[0.5px] border-gray-700 overflow-y-scroll no-scrollbar">
                         <div>
-                            <Feedcomp content={maintweet}></Feedcomp>
+                            <Feedcomp content={maindata.content} userId={maindata.userId}></Feedcomp>
 
 
 
 
-                            <Writetweet lable={`Reply to this tweet ` + modelId} modelType="Tweet" modelId={modelId} />
-                            {comment.map((comment) => (
-                                <div key={comment._id} >
-                                    <Feedcomp content={comment.content} />
+                            <Writetweet lable={`Reply to this tweet ` + modelId} modelType={modelType} modelId={modelId} onTweetPosted={fetchComment} />
+
+
+
+                            {commentondata.map((comment) => (
+                                <div key={comment._id} onClick={() => opencomment(comment._id)}>
+                                    <Feedcomp content={comment.content} userId={comment.userId} />
                                 </div>
                             ))}
+
+
+
+
 
                         </div>
 

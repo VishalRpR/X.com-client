@@ -22,7 +22,7 @@ export const SideBar = () => {
     useEffect(() => {
         async function getuser() {
 
-            const user = await axios.get(`${BACKEND_URL}/api/user/`, {
+            const user = await axios.get(`${BACKEND_URL}/api/user/id`, {
                 headers: { Authorization: `Bearer ${token}` }
 
             })

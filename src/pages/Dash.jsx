@@ -5,7 +5,6 @@ import TrendandSearch from '../components/TrendandSearch';
 import Writetweet from '../components/Writetweet';
 import axios from 'axios';
 import {SideBar} from '../components/SideBar';
-import CommentThread from '../components/CommentThread';
 import { BACKEND_URL } from '../../config';
 import { useNavigate } from 'react-router-dom';
 
@@ -13,19 +12,19 @@ import { useNavigate } from 'react-router-dom';
 function Dash() {
     const navigate=useNavigate();
     const [content, SetContent] = useState([]);
-    const [selectedTweet, setSelectedTweet] = useState(null);
-  
+    
+    const fetchTweet = async () => {
+        try {
+            const tweet = await axios.get(`${BACKEND_URL}/api/tweet`);
+
+            SetContent(tweet.data.data);
+        } catch (error) {
+
+        }
+    };
   
     useEffect(() => {
-        const fetchTweet = async () => {
-            try {
-                const tweet = await axios.get(`${BACKEND_URL}/api/tweet`);
-               
-                SetContent(tweet.data.data);
-            } catch (error) {
-            
-            }
-        };
+       
 
         fetchTweet();
 
@@ -33,9 +32,9 @@ function Dash() {
 
     const handleTweetClick = (tweet) => {
        
-        setSelectedTweet(tweet);
+       
 
-        navigate(`/dash/${tweet._id}`)
+        navigate(`/dash/tweet/${tweet._id}`)
     };
 
 
@@ -49,16 +48,14 @@ function Dash() {
                 <div className='flex justify-start grid grid-cols-9 overflow-y-scroll no-scrollbar col-span-9'>
 
                     <div className="col-span-5 border-r-[0.5px] border-gray-700 overflow-y-scroll no-scrollbar">
-                        <Writetweet lable='What is Happening?!' modelType={null} modelId={null}></Writetweet>
-                        {selectedTweet ? (
-                            <CommentThread commentData={selectedTweet} />
-                        ) : (
-                            content.map((tweet) => (
+                        <Writetweet lable='What is Happening?!' modelType={null} modelId={null} onTweetPosted={fetchTweet}></Writetweet>
+                      
+                           { content.map((tweet) => (
                                 <div key={tweet._id} onClick={() => handleTweetClick(tweet)}>
-                                    <Feedcomp content={tweet.content} />
+                                    <Feedcomp key={tweet._id} content={tweet.content} userId={tweet.user} />
                                 </div>
-                            ))
-                        )}
+                            ))}
+                      
 
                       
 
