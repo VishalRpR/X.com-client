@@ -39,7 +39,7 @@ function Singlepage({ modelType }) {
 
                     });
 
-                    console.log(onecomment.data.data.content)
+                  
                     SetMaindata(onecomment.data.data)
 
 
@@ -58,14 +58,14 @@ function Singlepage({ modelType }) {
     const fetchComment = async () => {
         try {
 
-            console.log(modelType)
+          
             const comment = await axios.get(`${BACKEND_URL}/api/comment/?modelId=${modelId}&&modelType=${modelType}`, {
                 headers: { Authorization: `Bearer ${token}` }
             });
 
 
 
-            console.log(comment.data.data)
+           
             SetCommentondata(comment.data.data);
 
 
@@ -86,7 +86,6 @@ function Singlepage({ modelType }) {
 
     async function opencomment(modelId) {
 
-        console.log("clicked")
 
         await navigate(`/dash/comment/${modelId}`);
     }

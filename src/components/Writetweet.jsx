@@ -63,8 +63,6 @@ const Writetweet = ({ lable, modelType = null, modelId = null, onTweetPosted }) 
                 headers: { Authorization: `Bearer ${tok}` }
             })
 
-
-            console.log(response)
             if (response.data.data._id) {
                 toast.success("Tweet creatd successfully");
                 SetTweet("");
