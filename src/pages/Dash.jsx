@@ -1,79 +1,65 @@
-import React, { useEffect, useState } from 'react'
-import Feedcomp from '../components/Feedcomp';
+import React, { useEffect, useState } from "react";
+import Feedcomp from "../components/Feedcomp";
 
-import TrendandSearch from '../components/TrendandSearch';
-import Writetweet from '../components/Writetweet';
-import axios from 'axios';
-import {SideBar} from '../components/SideBar';
-import { BACKEND_URL } from '../../config';
-import { useNavigate } from 'react-router-dom';
-
+import TrendandSearch from "../components/TrendandSearch";
+import Writetweet from "../components/Writetweet";
+import axios from "axios";
+import { SideBar } from "../components/SideBar";
+import { BACKEND_URL } from "../../config";
+import { useNavigate } from "react-router-dom";
 
 function Dash() {
-    const navigate=useNavigate();
-    const [content, SetContent] = useState([]);
-    
-    const fetchTweet = async () => {
-        try {
-            const tweet = await axios.get(`${BACKEND_URL}/api/tweet`);
+  const navigate = useNavigate();
+  const [content, SetContent] = useState([]);
 
-            SetContent(tweet.data.data);
-        } catch (error) {
+  const fetchTweet = async () => {
+    try {
+      const tweet = await axios.get(`${BACKEND_URL}/api/tweet`);
 
-        }
-    };
-  
-    useEffect(() => {
-       
+      SetContent(tweet.data.data);
+    } catch (error) {}
+  };
 
-        fetchTweet();
+  useEffect(() => {
+    fetchTweet();
+  }, []);
 
-    }, []);
+  const handleTweetClick = (tweet) => {
+    navigate(`/dash/tweet/${tweet._id}`);
+  };
 
-    const handleTweetClick = (tweet) => {
-       
-       
+  return (
+    <div>
+      <div className="grid grid-cols-12 h-screen w-screen mt-0 pt-0">
+        <SideBar />
+        <div className="flex justify-start grid grid-cols-9 overflow-y-scroll no-scrollbar col-span-9">
+          <div className="col-span-5 border-r-[0.5px] border-gray-700 overflow-y-scroll no-scrollbar">
+            <Writetweet
+              lable="What is Happening?!"
+              modelType={null}
+              modelId={null}
+              onTweetPosted={fetchTweet}
+            ></Writetweet>
 
-        navigate(`/dash/tweet/${tweet._id}`)
-    };
+            {content.map((tweet) => (
+              <div key={tweet._id} onClick={() => handleTweetClick(tweet)}>
+                <Feedcomp
+                  key={tweet._id}
+                  content={tweet.content}
+                  image={tweet.image}
+                  userId={tweet.user}
+                />
+              </div>
+            ))}
+          </div>
 
-
-
-    return (
-        <div>
-
-            <div className="grid grid-cols-12 h-screen w-screen mt-0 pt-0">
-
-                <SideBar/>
-                <div className='flex justify-start grid grid-cols-9 overflow-y-scroll no-scrollbar col-span-9'>
-
-                    <div className="col-span-5 border-r-[0.5px] border-gray-700 overflow-y-scroll no-scrollbar">
-                        <Writetweet lable='What is Happening?!' modelType={null} modelId={null} onTweetPosted={fetchTweet}></Writetweet>
-                      
-                           { content.map((tweet) => (
-                                <div key={tweet._id} onClick={() => handleTweetClick(tweet)}>
-                                    <Feedcomp key={tweet._id} content={tweet.content} userId={tweet.user} />
-                                </div>
-                            ))}
-                      
-
-                      
-
-
-                    </div>
-
-                    <div className="col-span-4 mr-32 pb-2 pl-7 mt-0">
-                        <TrendandSearch></TrendandSearch>
-
-
-                    </div>
-                </div>
-
-
-            </div>
-
+          <div className="col-span-4 mr-32 pb-2 pl-7 mt-0">
+            <TrendandSearch onTweetPosted={fetchTweet}></TrendandSearch>
+          </div>
         </div>
-    )
+      </div>
+    </div>
+  );
 }
 
-export default Dash
+export default Dash;

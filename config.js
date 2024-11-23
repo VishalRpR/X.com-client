@@ -1,1 +1,1 @@
-export const BACKEND_URL ="https://x-com-server-2.onrender.com"
+export const BACKEND_URL = "https://x-com-server-2.onrender.com";
